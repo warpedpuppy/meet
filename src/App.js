@@ -51,7 +51,7 @@ class App extends React.Component {
       let calendarCallJSON = await calendarCall.json();
       console.log("final product = ", calendarCallJSON)
 
-      if (calendarCallJSON.errors.length) {
+      if (calendarCallJSON.errors) {
         this.goToRoot();
       } else {
         this.setState({events: calendarCallJSON.events})
