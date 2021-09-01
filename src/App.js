@@ -16,22 +16,30 @@ class App extends React.Component {
   async testEndPoints () {
 
     const queryString = window.location.search;
-    console.log(queryString);
+    
     const urlParams = new URLSearchParams(queryString);
 
     let code = urlParams.get("code");
 
     if (!code) {
+      console.log("step one")
       let result = await fetch('https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url');
       let resultJson = await result.json();
       let { authUrl } = resultJson;
-      console.log(authUrl)
+
       const urlParams = new URLSearchParams(authUrl);
-      console.log(urlParams)
+      
       this.setState({code: urlParams.get("code")})
       window.location.href = authUrl;
+
     } else {
-      console.log(code)
+      console.log("step two", code)
+
+      if (decodeURIComponent(code) === code) {
+          code = encodeURIComponent(code);
+      }
+      console.log("encoded code", code)
+
       let result = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/token/${code}`)
       let resultJson = await result.json();
       console.log("from token code", resultJson)
