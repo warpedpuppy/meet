@@ -106,8 +106,7 @@ module.exports.getAccessToken = async (event) => {
       });
   };
 
-// named from serverless.yml
-// works asynchronously
+
 module.exports.getCalendarEvents = async (event) => {
 
   const oAuth2Client = new google.auth.OAuth2(
@@ -117,30 +116,30 @@ module.exports.getCalendarEvents = async (event) => {
   );
 
   const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
-  // sets access token as credentials
   oAuth2Client.setCredentials({ access_token });
 
   return new Promise((resolve, reject) => {
-    // This calendar method will get a list of events from the “fullstackwebdev”
-    // Google calendar using oAuth2Client for authentication.
-    calendar.events.list(
-      {
-        calendarId: calendar_id,
-        auth: oAuth2Client,
-        timeMin: new Date().toISOString(),
-        singleEvents: true,
-        orderBy: "startTime",
-      },
-      (error, response) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(response);
+      console.log('calendar',calendar)
+      calendar.events.list(
+        {
+          calendarId: calendar_id,
+          auth: oAuth2Client,
+          timeMin: new Date().toISOString(),
+          singleEvents: true,
+          orderBy: "startTime",
+        },
+        (error, response) => {
+          if (error) {
+            reject(error);
+          } else {
+            console.log("response", response)
+            resolve(response);
+          }
         }
-      }
-    );
-  })
+      );
+    })
     .then((results) => {
+      console.log("then", results)
       return {
         statusCode: 200,
         headers: {
