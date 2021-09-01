@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 
 class App extends React.Component {
-  state = { events: [] }
+  state = {code: '', events: []}
   componentDidMount = () => {
 
     this.testEndPoints();
   }
 
   async testEndPoints () {
-    console.log("test end points")
+
     const queryString = window.location.search;
     
     const urlParams = new URLSearchParams(queryString);
@@ -32,9 +32,14 @@ class App extends React.Component {
       let resultJson = await result.json();
 
       const { access_token } = resultJson
+      let calendarCall = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${access_token}`);
+      let calendarCallJSON = await calendarCall.json();
 
-      console.log(access_token)
-     
+      if (calendarCallJSON.errors) {
+        this.goToRoot();
+      } else {
+        this.setState({events: calendarCallJSON.events})
+      }
     }
   }
 
