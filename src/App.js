@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 
 class App extends React.Component {
-  state = {code: '', events: []}
+  state = { events: [] }
   componentDidMount = () => {
 
     this.testEndPoints();
   }
 
   async testEndPoints () {
-
+    console.log("test end points")
     const queryString = window.location.search;
     
     const urlParams = new URLSearchParams(queryString);
