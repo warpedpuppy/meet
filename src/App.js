@@ -25,21 +25,21 @@ class App extends React.Component {
 
     } else {
  
-      // if (decodeURIComponent(code) === code) {
-      //     code = encodeURIComponent(code);
-      // }
-      // let result = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/token/${code}`)
-      // let resultJson = await result.json();
+      if (decodeURIComponent(code) === code) {
+          code = encodeURIComponent(code);
+      }
+      let result = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/token/${code}`)
+      let resultJson = await result.json();
 
-      // const { access_token } = resultJson
-      // let calendarCall = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${access_token}`);
-      // let calendarCallJSON = await calendarCall.json();
+      const { access_token } = resultJson
+      let calendarCall = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${access_token}`);
+      let calendarCallJSON = await calendarCall.json();
 
-      // if (calendarCallJSON.errors) {
-      //   this.goToRoot();
-      // } else {
-      //   this.setState({events: calendarCallJSON.events})
-      // }
+      if (calendarCallJSON.errors) {
+        this.goToRoot();
+      } else {
+        this.setState({events: calendarCallJSON.events})
+      }
     }
   }
 

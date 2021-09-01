@@ -23,7 +23,7 @@ const credentials = {
   javascript_origins: ["https://warpedpuppy.github.io", "http://localhost:3000"],
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
-console.log("HERE", redirect_uris[0])
+
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
@@ -60,7 +60,7 @@ module.exports.getAuthURL = async () => {
   };
 };
 
-module.exports.getAccessToken = async (event) => {
+module.exports.getAccessToken =  event => {
   // The values used to instantiate the OAuthClient are at the top of the file
     const oAuth2Client = new google.auth.OAuth2(
       client_id,
@@ -106,54 +106,55 @@ module.exports.getAccessToken = async (event) => {
       });
   };
 
-
-
-  module.exports.getCalendarEvents = async (event) => {
+  module.exports.getCalendarEvents = event => {
 
     const oAuth2Client = new google.auth.OAuth2(
       client_id,
       client_secret,
       redirect_uris[0]
     );
-  
+    // Decode authorization code extracted from the URL query
     const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
+
     oAuth2Client.setCredentials({ access_token });
-  
-    return new Promise( (resolve, reject) => {
-  
-        calendar.events.list(
-          {
-            calendarId: calendar_id,
-            auth: oAuth2Client,
-            timeMin: new Date().toISOString(),
-            singleEvents: true,
-            orderBy: "startTime",
-          },
-          (error, response) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(response);
-            }
+    
+    return new Promise( (resolve, reject) => { 
+
+      calendar.events.list(
+        {
+          calendarId: calendar_id,
+          auth: oAuth2Client,
+          timeMin: new Date().toISOString(),
+          singleEvents: true,
+          orderBy: "startTime",
+        },
+        (error, response) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(response);
           }
-        );
-      })
-      .then( results => {
-        return {
-          statusCode: 200,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          },
-          body: JSON.stringify({ events: results.data.items })
-        };
-      })
-      .catch( error  => {
-        return {
-          statusCode: 500,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          },
-          body: JSON.stringify(error),
-        };
-      });
-  }
+        }
+      );
+
+    })
+    .then( results => {
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify({ events: results.data.items })
+      };
+    })
+    .catch( error  => {
+      return {
+        statusCode: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(error),
+      };
+    });
+     
+}
