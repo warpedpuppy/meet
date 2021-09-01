@@ -56,7 +56,7 @@ class App extends React.Component {
 
   }
   goToRoot = () => {
-    window.location.href = window.location.origin;
+    window.location.href = `${window.location.origin}/meet/`;
   }
   render () {
     const { events } = this.state;
