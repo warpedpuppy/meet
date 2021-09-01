@@ -50,7 +50,13 @@ class App extends React.Component {
       let calendarCall = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${access_token}`);
       let calendarCallJSON = await calendarCall.json();
       console.log("final product = ", calendarCallJSON)
-      this.setState({events: calendarCallJSON.events})
+
+      if (calendarCallJSON.errors.length) {
+        this.goToRoot();
+      } else {
+        this.setState({events: calendarCallJSON.events})
+      }
+      
 
     }
 
