@@ -21,10 +21,12 @@ class App extends React.Component {
       let result = await fetch('https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url');
       let resultJson = await result.json();
       let { authUrl } = resultJson;
-      window.location.href = authUrl;
+	  console.log(authUrl)
+    //   window.location.href = authUrl;
 
     } else {
- 
+		console.log('here');
+		return
       if (decodeURIComponent(code) === code) {
           code = encodeURIComponent(code);
       }
@@ -34,9 +36,9 @@ class App extends React.Component {
       const { access_token } = resultJson
       let calendarCall = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${access_token}`);
       let calendarCallJSON = await calendarCall.json();
-
+	  console.log(calendarCallJSON.errors)
       if (calendarCallJSON.errors) {
-        this.goToRoot();
+        // this.goToRoot();
       } else {
         this.setState({events: calendarCallJSON.events})
       }
@@ -44,7 +46,7 @@ class App extends React.Component {
   }
 
   goToRoot = () => {
-    window.location.href = `${window.location.origin}/meet/`;
+    // window.location.href = `${window.location.origin}/meet/`;
   }
 
   render () {
