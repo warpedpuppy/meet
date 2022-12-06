@@ -22,16 +22,18 @@ class App extends React.Component {
       let resultJson = await result.json();
       let { authUrl } = resultJson;
 	  console.log(authUrl)
-    //   window.location.href = authUrl;
+      window.location.href = authUrl;
 
     } else {
-		console.log('here');
-		return
+		
       if (decodeURIComponent(code) === code) {
           code = encodeURIComponent(code);
       }
       let result = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/token/${code}`)
       let resultJson = await result.json();
+
+	  console.log(resultJson);
+	  return;
 
       const { access_token } = resultJson
       let calendarCall = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${access_token}`);
