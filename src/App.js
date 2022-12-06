@@ -32,13 +32,12 @@ class App extends React.Component {
       let result = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/token/${code}`)
       let resultJson = await result.json();
 
-	  console.log(resultJson);
-	  return;
-
       const { access_token } = resultJson
       let calendarCall = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${access_token}`);
       let calendarCallJSON = await calendarCall.json();
-	  console.log(calendarCallJSON.errors)
+	  console.log("calendarCall", calendarCall)
+	  console.log("errors", calendarCallJSON.errors)
+	  return;
       if (calendarCallJSON.errors) {
         // this.goToRoot();
       } else {
