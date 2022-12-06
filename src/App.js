@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 class App extends React.Component {
-  state = {code: '', events: []}
+  state = {code: '', events: [], error: ''}
   componentDidMount = () => {
 
     this.testEndPoints();
@@ -42,9 +42,10 @@ class App extends React.Component {
 
 	  console.log("calendar", calendarCall)
 	  console.log("errors", calendarCallJSON.errors)
-		return;
+
 
       if (calendarCallJSON.errors) {
+		this.setState({error: calendarCallJSON.errors.message})
         // this.goToRoot();
       } else {
         this.setState({events: calendarCallJSON.events})
@@ -53,11 +54,22 @@ class App extends React.Component {
   }
 
   goToRoot = () => {
-    // window.location.href = `${window.location.origin}/meet/`;
+    window.location.href = `${window.location.origin}/meet/`;
   }
 
+  
+
   render () {
-    const { events } = this.state;
+    const { events, error } = this.state;
+
+	if (error) {
+		return (
+			<div className="App">
+				<h1>error: { error }</h1>
+			</div>
+		)
+	}
+
      return (
       <div className="App">
         <button onClick={this.goToRoot}>refresh</button>
