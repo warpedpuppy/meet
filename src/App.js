@@ -45,7 +45,7 @@ class App extends React.Component {
 
 
       if (calendarCallJSON.errors) {
-		this.setState({error: calendarCallJSON.errors.message})
+		this.setState({error: Array.isArray(calendarCallJSON.errors) ? calendarCallJSON.errors[0].message : calendarCallJSON.errors.message })
         // this.goToRoot();
       } else {
         this.setState({events: calendarCallJSON.events})
