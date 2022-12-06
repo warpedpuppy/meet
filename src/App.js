@@ -29,6 +29,7 @@ class App extends React.Component {
       if (decodeURIComponent(code) === code) {
           code = encodeURIComponent(code);
       }
+	  console.log('get code ', code);
       let result = await fetch(`https://m200p3c8ne.execute-api.us-east-1.amazonaws.com/dev/api/token/${code}`)
       let resultJson = await result.json();
 
@@ -41,7 +42,7 @@ class App extends React.Component {
 
 	  console.log("calendar", calendarCall)
 	  console.log("errors", calendarCallJSON.errors)
-return;
+		return;
 
       if (calendarCallJSON.errors) {
         // this.goToRoot();
