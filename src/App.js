@@ -72,6 +72,7 @@ class App extends React.Component {
 
      return (
       <div className="App">
+		<h1>event list:</h1>
         <button onClick={this.goToRoot}>refresh</button>
         <hr />
         <ul>
