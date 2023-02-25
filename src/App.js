@@ -5,7 +5,7 @@ class App extends React.Component {
   state = {code: '', events: [], error: ''}
   componentDidMount = () => {
 
-    this.testEndPoints();
+    // this.testEndPoints();
   }
 
   async testEndPoints () {
@@ -22,7 +22,7 @@ class App extends React.Component {
       let resultJson = await result.json();
       let { authUrl } = resultJson;
 	  console.log(authUrl)
-      window.location.href = authUrl;
+    //   window.location.href = authUrl;
 
     } else {
 		
@@ -60,31 +60,33 @@ class App extends React.Component {
   
 
   render () {
-    const { events, error } = this.state;
+    // const { events, error } = this.state;
 
-	if (error) {
-		return (
-			<div className="App">
-				<h1>error: { error }</h1>
-			</div>
-		)
-	}
+	return <h1>hello world</h1>; 
+// 	if (error) {
+// 		return (
+// 			<div className="App">
+// 				<h1>error: { error }</h1>
+// 			</div>
+// 		)
+// 	}
 
-     return (
-      <div className="App">
-		<h1>event list:</h1>
-        <button onClick={this.goToRoot}>refresh</button>
-        <hr />
-        <ul>
-          {
-            events.map( (item, i) => {
-              return <li key={i}>{item.summary}</li>
-            })
-          }
-        </ul>
-        <hr />
-      </div>
-    );
+//      return (
+//       <div className="App">
+// 		<h1>event list:</h1>
+//         <button onClick={this.goToRoot}>refresh</button>
+//         <hr />
+//         <ul>
+//           {
+//             events.map( (item, i) => {
+//               return <li key={i}>{item.summary}</li>
+//             })
+//           }
+//         </ul>
+//         <hr />
+//       </div>
+//     );
+//   }
   }
  
 }
