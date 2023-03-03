@@ -60,34 +60,34 @@ class App extends React.Component {
   
 
   render () {
-    // const { events, error } = this.state;
+    const { events, error } = this.state;
 
-	return <h1>hello world</h1>; 
-// 	if (error) {
-// 		return (
-// 			<div className="App">
-// 				<h1>error: { error }</h1>
-// 			</div>
-// 		)
-// 	}
 
-//      return (
-//       <div className="App">
-// 		<h1>event list:</h1>
-//         <button onClick={this.goToRoot}>refresh</button>
-//         <hr />
-//         <ul>
-//           {
-//             events.map( (item, i) => {
-//               return <li key={i}>{item.summary}</li>
-//             })
-//           }
-//         </ul>
-//         <hr />
-//       </div>
-//     );
-//   }
+	if (error) {
+		return (
+			<div className="App">
+				<h1>error: { error }</h1>
+			</div>
+		)
+	}
+
+     return (
+      <div className="App">
+		<h1>event list:</h1>
+        <button onClick={this.goToRoot}>refresh</button>
+        <hr />
+        <ul>
+          {
+            events.map( (item, i) => {
+              return <li key={i}>{item.summary}</li>
+            })
+          }
+        </ul>
+        <hr />
+      </div>
+    );
   }
+  
  
 }
 
