@@ -5,7 +5,7 @@ class App extends React.Component {
   state = {code: '', events: [], error: ''}
   componentDidMount = () => {
 
-    // this.testEndPoints();
+    this.testEndPoints();
   }
 
   async testEndPoints () {
@@ -22,7 +22,7 @@ class App extends React.Component {
       let resultJson = await result.json();
       let { authUrl } = resultJson;
 	  console.log(authUrl)
-    //   window.location.href = authUrl;
+      window.location.href = authUrl;
 
     } else {
 		
