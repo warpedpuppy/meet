@@ -61,7 +61,7 @@ class App extends React.Component {
 
   render () {
     const { events, error } = this.state;
-
+	return <h1>hello world!</h1>
 
 	if (error) {
 		return (
