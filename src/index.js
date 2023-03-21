@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import atatus from 'atatus-spa';
-atatus.config('c31686ab728743d7aca9ce2d6e9de0a0').install();
+import * as atatus from 'atatus-spa';
+atatus.config('8963213e3b144ddc8bb6ead44aae4ba3').install();
 atatus.notify(new Error('Test Atatus Setup'));
 ReactDOM.render(
   <React.StrictMode>
