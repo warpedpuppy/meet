@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 
 class App extends React.Component {
-  state = {code: '', events: [], error: ''}
+  state = {code: '', events: [], error: '', testing: true}
   componentDidMount = () => {
 
-    this.testEndPoints();
+    if (!this.state.testing) this.testEndPoints();
   }
 
   async testEndPoints () {
@@ -60,7 +60,11 @@ class App extends React.Component {
   
 
   render () {
-    const { events, error } = this.state;
+
+	
+    const { events, error, testing } = this.state;
+
+	if (testing) return <h1>hello.</h1>
 
 
 	if (error) {

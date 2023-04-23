@@ -60,6 +60,29 @@ module.exports.getAuthURL = async () => {
   };
 };
 
+// module.exports.getAuthURL = async () => {
+// 	/**
+// 	 * Any scopes passed must be enabled in the
+// 	 * "OAuth consent screen" 
+// 	 * scopes are the ones users will see when the consent screen is displayed to them.
+// 	 */
+// 	const authUrl = oAuth2Client.generateAuthUrl({
+// 	  access_type: "offline",
+// 	  scope: SCOPES,
+// 	});
+  
+// 	return {
+// 	  statusCode: 200,
+// 	  headers: {
+// 		"Access-Control-Allow-Origin": "*",
+// 		"Access-Control-Allow-Credentials": true,
+// 	  },
+// 	  body: {
+// 		authUrl: authUrl,
+// 	  },
+// 	};
+//   };
+
 module.exports.getAccessToken =  event => {
   // The values used to instantiate the OAuthClient are at the top of the file
     const oAuth2Client = new google.auth.OAuth2(
@@ -117,9 +140,9 @@ module.exports.getAccessToken =  event => {
     const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
 
    
-    
+    oAuth2Client.setCredentials({ access_token });
     return new Promise( (resolve, reject) => { 
-		oAuth2Client.setCredentials({ access_token });
+		
       calendar.events.list(
         {
           calendarId: calendar_id,
