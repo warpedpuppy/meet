@@ -75,7 +75,7 @@ class App extends React.Component {
     if (testing) return (
 	<>
 	<h1>hello.</h1>
-	<h2>here is the code from the url string: {code} </h2>
+	<p>here is the code from the url string: {code} </p>
 	</>
 	);
 
